@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# Gestion_UPF
-Gestion Scolarité
-=======
 # UPF Gestion - Application de Gestion Universitaire
 
 ## 📋 Description
