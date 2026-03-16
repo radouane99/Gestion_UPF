@@ -1,6 +1,6 @@
 <?php
 // reset_password_traitement.php - VERSION FINALE CORRIGÉE
-require_once 'config/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 // Activation des erreurs
 ini_set('display_errors', 1);

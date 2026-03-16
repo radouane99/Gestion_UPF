@@ -22,7 +22,7 @@ $stmt->execute([$_SESSION['etudiant_id']]);
 $etudiant = $stmt->fetch();
 
 if (!$etudiant) {
-    header('Location: ../logout.php');
+    header('Location: ../auth/logout.php');
     exit();
 }
 

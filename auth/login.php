@@ -5,9 +5,9 @@ session_start();
 // Rediriger si déjà connecté
 if (isset($_SESSION['user_id'])) {
     if ($_SESSION['role'] === 'admin') {
-        header('Location: admin/dashboard.php');
+        header('Location: ./admin/dashboard.php');
     } else {
-        header('Location: user/profil.php');
+        header('Location: ./user/profil.php');
     }
     exit();
 }
@@ -774,9 +774,9 @@ if ($hour < 12) {
                     <div class="testimonial">
                         <p>"Une application intuitive qui facilite la gestion des étudiants et le suivi académique."</p>
                         <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+                            <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="User">
                             <div>
-                                <strong>Pr. M. KZADRI</strong>
+                                <strong>Pr. Mr. KZADRI</strong>
                                 <p style="font-size: 12px;">Responsable pédagogique</p>
                             </div>
                         </div>

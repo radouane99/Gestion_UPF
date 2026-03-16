@@ -12,6 +12,6 @@ session_destroy();
 setcookie('last_login', '', time() - 3600, '/');
 
 // 4. التوجيه إلى login مع رسالة
-header('Location: login.php?msg=deconnecte');
+header('Location: ./login.php?msg=deconnecte');
 exit();
 ?>

@@ -1,6 +1,6 @@
 <?php
 // reset_password.php - Page pour entrer nouveau mot de passe
-require_once 'config/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 $token = $_GET['token'] ?? '';
 

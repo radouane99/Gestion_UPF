@@ -1,6 +1,19 @@
 <?php
+ob_start(); // bufferisation
+
 // user/changer_password.php
-require_once '../includes/auth_check_user.php';
+require_once '../includes/auth_check_admin.php'; // Vérifie que l'utilisateur est admin (ou adapte selon ton besoin)
+require_once '../config/database.php';
+
+// Si le formulaire est soumis en POST (traitement direct dans le même fichier)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // ... logique de changement de mot de passe ...
+    // Si succès, rediriger
+    header('Location: profil.php?success=1');
+    exit();
+}
+
+// Maintenant seulement on inclut l'en-tête
 require_once '../includes/header.php';
 ?>
 

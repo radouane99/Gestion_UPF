@@ -1,6 +1,7 @@
 <?php
 // user/changer_password_traitement.php
-require_once '../includes/auth_check_user.php';
+// On utilise un fichier de vérification commun qui vérifie simplement que l'utilisateur est connecté
+require_once '../includes/auth_check.php'; // À créer (ou on peut vérifier manuellement)
 require_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -37,15 +38,12 @@ if ($new_password !== $confirm_password) {
     $errors[] = "Les nouveaux mots de passe ne correspondent pas";
 }
 
-if ($new_password === $current_password) {
-    $errors[] = "Le nouveau mot de passe doit être différent de l'ancien";
-}
-
 if (empty($errors)) {
     try {
-        // Récupérer le mot de passe actuel
-        $stmt = $pdo->prepare("SELECT password FROM utilisateurs WHERE etudiant_id = ?");
-        $stmt->execute([$_SESSION['etudiant_id']]);
+        // Récupérer l'utilisateur par son ID (présent dans la session)
+        $user_id = $_SESSION['user_id'];
+        $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE id = ?");
+        $stmt->execute([$user_id]);
         $user = $stmt->fetch();
 
         if (!$user) {
@@ -57,22 +55,32 @@ if (empty($errors)) {
             throw new Exception("Le mot de passe actuel est incorrect");
         }
 
+        // Éviter de réutiliser le même mot de passe
+        if (password_verify($new_password, $user['password'])) {
+            throw new Exception("Le nouveau mot de passe doit être différent de l'ancien");
+        }
+
         // Hasher le nouveau mot de passe
         $hashedPassword = password_hash($new_password, PASSWORD_DEFAULT);
 
         // Mettre à jour
-        $stmt = $pdo->prepare("UPDATE utilisateurs SET password = ? WHERE etudiant_id = ?");
-        $stmt->execute([$hashedPassword, $_SESSION['etudiant_id']]);
+        $stmt = $pdo->prepare("UPDATE utilisateurs SET password = ? WHERE id = ?");
+        $stmt->execute([$hashedPassword, $user_id]);
 
         // Log
-        error_log("Utilisateur {$_SESSION['etudiant_id']} a changé son mot de passe");
+        error_log("Utilisateur {$user['login']} a changé son mot de passe");
 
         $_SESSION['flash'] = [
             'type' => 'success',
             'message' => "✅ Mot de passe changé avec succès !"
         ];
 
-        header('Location: profil.php');
+        // Redirection selon le rôle
+        if ($user['role'] === 'admin') {
+            header('Location: ../admin/profil.php');
+        } else {
+            header('Location: profil.php');
+        }
         exit();
 
     } catch (Exception $e) {

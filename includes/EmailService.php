@@ -142,7 +142,7 @@ class EmailService {
      * Envoie un email de réinitialisation de mot de passe
      */
     public function sendPasswordResetEmail(string $to, string $name, string $token): array {
-        $resetLink = "http://localhost/Gestion_UPF/reset_password.php?token=" . $token;
+        $resetLink = "http://localhost/Gestion_UPF/auth/reset_password.php?token=" . $token;
         
         $subject = "🔐 Réinitialisation de votre mot de passe - UPF Gestion";
         

@@ -1,7 +1,8 @@
 <?php
 // forgot_password_traitement.php
-require_once 'config/database.php';
-require_once 'includes/EmailService.php';
+require_once __DIR__ . '/../config/database.php';
+
+require_once __DIR__ . '/../includes/EmailService.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: forgot_password.php');

@@ -15,7 +15,7 @@ if (empty($login) || empty($password)) {
     exit();
 }
 
-require_once 'config/database.php';
+require_once __DIR__ . '/../config/database.php';
 $pdo = getConnexion();
 
 try {
@@ -30,7 +30,8 @@ try {
         $_SESSION['role'] = $user['role'];
         $_SESSION['etudiant_id'] = $user['etudiant_id'];
         $_SESSION['heure_connexion'] = date('Y-m-d H:i:s');
-        
+        $_SESSION['photo'] = $user['photo']; // après avoir défini les autres variables de session
+
         setcookie('last_login', $login, time() + (30 * 24 * 3600), '/');
         
         $sqlUpdate = "UPDATE utilisateurs SET derniere_connexion = NOW() WHERE id = :id";
@@ -38,17 +39,17 @@ try {
         $stmtUpdate->execute([':id' => $user['id']]);
         
         if ($user['role'] === 'admin') {
-            header('Location: admin/dashboard.php');
+header('Location: ' . BASE_URL . 'admin/dashboard.php');
         } else {
-            header('Location: user/profil.php');
+            header('Location: ' . BASE_URL . 'user/profil.php');
         }
         exit();
     } else {
-        header('Location: login.php?erreur=1');
+        header('Location: ' . BASE_URL . 'auth/login.php?erreur=1');
         exit();
     }
 } catch (PDOException $e) {
-    header('Location: login.php?erreur=1');
+    header('Location: ' . BASE_URL . 'auth/login.php?erreur=1');
     exit();
 }
 ?>

@@ -1,11 +1,13 @@
 <?php
 // config/database.php
+define('BASE_URL', 'http://localhost/Gestion_UPF/');
 
 function getConnexion() {
     $host = 'localhost';
     $dbname = 'gestion_upf_db';
     $username = 'root';
     $password = '';
+    
 
     try {
         // D'abord, connexion sans sélectionner la BDD

@@ -6,9 +6,7 @@ require_once '../includes/header.php';
 
 $pdo = getConnexion();
 
-// =============================================
 // STATISTIQUES GÉNÉRALES
-// =============================================
 
 // Total étudiants
 $stmt = $pdo->query("SELECT COUNT(*) FROM etudiants");
@@ -26,9 +24,7 @@ $totalUtilisateurs = $stmt->fetchColumn();
 $stmt = $pdo->query("SELECT COUNT(*) FROM documents");
 $totalDocuments = $stmt->fetchColumn();
 
-// =============================================
 // STATISTIQUES PÉDAGOGIQUES
-// =============================================
 
 // Étudiants par filière
 $stmt = $pdo->query("
@@ -86,9 +82,7 @@ $stmt = $pdo->query("
 ");
 $derniersEtudiants = $stmt->fetchAll();
 
-// =============================================
 // ACTIVITÉ RÉCENTE
-// =============================================
 
 // Dernières connexions
 $stmt = $pdo->query("
@@ -111,10 +105,7 @@ $stmt = $pdo->query("
     LIMIT 5
 ");
 $derniersDocuments = $stmt->fetchAll();
-
-// =============================================
 // TAUX DE RÉUSSITE
-// =============================================
 
 $stmt = $pdo->query("
     SELECT 
@@ -128,10 +119,7 @@ $pourcentageReussite = $tauxReussite['total'] > 0
     ? round(($tauxReussite['reussite'] / $tauxReussite['total']) * 100, 1) 
     : 0;
 
-// =============================================
 // FILIÈRE AVEC MEILLEURE MOYENNE
-// =============================================
-
 $stmt = $pdo->query("
     SELECT f.IntituleF, AVG(e.FNote) as moyenne
     FROM filieres f
@@ -144,9 +132,7 @@ $stmt = $pdo->query("
 $meilleureFiliere = $stmt->fetch();
 ?>
 
-<!-- ============================================= -->
 <!-- STYLES CSS MODERNES -->
-<!-- ============================================= -->
 <style>
     :root {
         --upf-blue: #294898;

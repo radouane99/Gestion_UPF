@@ -2,8 +2,7 @@
 // admin/etudiants/ajouter_traitement.php
 require_once '../../includes/auth_check_admin.php';
 require_once '../../config/database.php';
-require_once '../../includes/functions.php'; // Pour generateLogin et generateRandomPassword
-
+require_once '../../includes/functions.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ajouter.php');
     exit();
