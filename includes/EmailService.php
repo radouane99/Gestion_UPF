@@ -146,17 +146,17 @@ class EmailService {
         
         $subject = "🔐 Réinitialisation de votre mot de passe - UPF Gestion";
         
-        $body = $this->getPasswordResetTemplate($name, $resetLink);
-        $altBody = $this->getPasswordResetTextTemplate($name, $resetLink);
-        
-        return $this->send([
-            'to' => $to,
-            'name' => $name,
-            'subject' => $subject,
-            'body' => $body,
-            'altBody' => $altBody
-        ]);
-    }
+            $body = $this->getPasswordResetTemplate($name, $resetLink);
+            $altBody = $this->getPasswordResetTextTemplate($name, $resetLink);
+            
+            return $this->send([
+                'to' => $to,
+                'name' => $name,
+                'subject' => $subject,
+                'body' => $body,
+                'altBody' => $altBody
+            ]);
+        }
     
     /**
      * Envoie un email de bienvenue avec identifiants
