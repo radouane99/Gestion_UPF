@@ -1,4 +1,6 @@
 # UPF Gestion - Application de Gestion Universitaire
+<img width="1489" height="816" alt="image" src="https://github.com/user-attachments/assets/e8c7fb23-5d42-4cbe-a576-d32e75fa53b5" />
+
 
 ## 📋 Description
 
